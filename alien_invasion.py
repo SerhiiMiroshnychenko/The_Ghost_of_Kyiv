@@ -2,6 +2,7 @@ import sys
 
 import pygame
 
+
 class AlienInvasion:
     """Загальний клас, що керує ресурсами та поведінкою гри."""
 
