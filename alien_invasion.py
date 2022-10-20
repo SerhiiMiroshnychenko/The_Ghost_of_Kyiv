@@ -2,6 +2,8 @@ import sys
 
 import pygame
 
+from settings import Settings
+
 
 class AlienInvasion:
     """Загальний клас, що керує ресурсами та поведінкою гри."""
@@ -9,14 +11,14 @@ class AlienInvasion:
     def __init__(self):
         """Ініціалізувати гру, створити ресурси гри."""
         pygame.init()
+        self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((1200, 800))  # Створює вікно, у якому будуть показуватися графічні
-        # елементи забавки. Аргумент (1200, 800) - це кортеж, що позначає розміри вікна завширшки та заввишки
-        # в пікселях. Це "поверхня" (surface) - частина екрана, де показується елемент гри.
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        # Створює вікно, у якому будуть показуватися графічні елементи забавки.
+        # Аргумент (self.settings.screen_width, self.settings.screen_height) - це кортеж, що позначає розміри вікна
+        # завширшки та заввишки в пікселях.
+        # Це "поверхня" (surface) - частина екрана, де показується елемент гри.
         pygame.display.set_caption("Alien Invasion")
-
-        # Задати колір фону
-        self.bg_color = (100, 100, 120)  # red-green-blue
 
     def run_game(self):
         """Розпочати головний цикл гри."""
@@ -29,7 +31,7 @@ class AlienInvasion:
                     sys.exit()                 # Вихід з гри.
 
             # Наново перемалювати екран на кожній ітерації циклу.
-            self.screen.fill(self.bg_color)
+            self.screen.fill(self.settings.bg_color)
 
             # Показати останній намальований екран.
             pygame.display.flip()
