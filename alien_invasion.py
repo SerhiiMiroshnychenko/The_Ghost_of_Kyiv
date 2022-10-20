@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from settings import Settings
+from ship import Ship
 
 
 class AlienInvasion:
@@ -20,6 +21,8 @@ class AlienInvasion:
         # Це "поверхня" (surface) - частина екрана, де показується елемент гри.
         pygame.display.set_caption("Alien Invasion")
 
+        self.ship = Ship(self)  # Створюємо корабель
+
     def run_game(self):
         """Розпочати головний цикл гри."""
         while True:
@@ -31,7 +34,8 @@ class AlienInvasion:
                     sys.exit()                 # Вихід з гри.
 
             # Наново перемалювати екран на кожній ітерації циклу.
-            self.screen.fill(self.settings.bg_color)
+            self.screen.fill(self.settings.bg_color)  # Малюємо фон
+            self.ship.blitme()  # Малюємо корабель
 
             # Показати останній намальований екран.
             pygame.display.flip()
