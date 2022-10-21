@@ -18,13 +18,17 @@ class Ship:
         # Створювати кожен новий корабель внизу екрана, по центру.
         self.rect.midbottom = self.screen_rect.midbottom
 
-        # Індикатор руху.
-        self.moving_right = False
+        # Індикатори руху.
+        self.moving_right = False  # вправо
+        self.moving_left = False   # вліво
 
     def update(self):
-        """Оновити поточну позицію корабля на основі індикатора руху."""
-        if self.moving_right:
-            self.rect.x += 1
+        """Оновити поточну позицію корабля на основі індикаторів руху."""
+        if self.moving_right:  # Індикатор руху вправо.
+            self.rect.x += 1   # Зміщення об'єкта rect вправо.
+        if self.moving_left:   # Індикатор руху вліво.
+            self.rect.x -= 1   # Зміщення об'єкта rect вліво.
+
 
     def blitme(self):
         """Намалювати корабель у його поточному розташуванні."""
