@@ -18,6 +18,11 @@ class Ship:
         # Створювати кожен новий корабель внизу екрана, по центру.
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # Індикатор руху.
+        self.moving_right = False
+
+    def update(self):
+
     def blitme(self):
         """Намалювати корабель у його поточному розташуванні."""
         self.screen.blit(self.image, self.rect)  #
