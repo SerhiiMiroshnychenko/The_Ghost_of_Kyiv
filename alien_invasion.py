@@ -26,8 +26,8 @@ class AlienInvasion:
     def run_game(self):
         """Розпочати головний цикл гри."""
         while True:
-            self._check_events()
-            self._update_screen()
+            self._check_events()   # Перевіряємо нові події
+            self._update_screen()  # Оновлюємо екран
 
     def _check_events(self):
         # Слідкувати за подіями миші та клавіатури.
