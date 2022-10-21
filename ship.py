@@ -28,10 +28,12 @@ class Ship:
 
     def update(self):
         """Оновити поточну позицію корабля на основі індикаторів руху."""
-        if self.moving_right:  # Індикатор руху вправо.
+        if self.moving_right and self.rect.right < self.screen_rect.right:  # Індикатор руху вправо.
+            # self.rect.right < self.screen_rect.right - перевірка чи не дійшов краю екрана
             self.x += self.settings.ship_speed   # Зміщення позиції корабля по горизонталі вправо
             # на ship_speed пікселей. (Перемістити корабель праворуч.)
-        if self.moving_left:   # Індикатор руху вліво.
+        if self.moving_left and self.rect.left > 0:   # Індикатор руху вліво.
+            # self.rect.left > 0 - перевірка чи не дійшов краю екрана
             self.x -= self.settings.ship_speed   # Зміщення позиції корабля по горизонталі вліво
             # на ship_speed пікселей. (Перемістити корабель ліворуч.)
 
