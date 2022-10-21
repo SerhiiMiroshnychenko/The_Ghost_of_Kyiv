@@ -38,15 +38,23 @@ class AlienInvasion:
             if event.type == pygame.QUIT:  # Якщо гравець зачиняє вікно:
                 sys.exit()  # Вихід з гри.
             elif event.type == pygame.KEYDOWN:   # Якщо клавіша натиснута.
-                if event.key == pygame.K_RIGHT:  # Якщо це клавіша "в право".
-                    self.ship.moving_right = True  # Індикатор руху вправо => True
-                elif event.key == pygame.K_LEFT:  # Якщо це клавіша "вліво".
-                    self.ship.moving_left = True  # Індикатор руху вліво => True
+                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:  # Коли клавіша відпускається.
-                if event.key == pygame.K_RIGHT:  # Якщо це клавіша "в право".
-                    self.ship.moving_right = False  # Індикатор руху вправо => False
-                elif event.key == pygame.K_LEFT:  # Якщо це клавіша "вліво".
-                    self.ship.moving_left = False  # Індикатор руху вліво => False
+                self._check_keyup_events(event)
+
+    def _check_keydown_events(self, event):
+        """Реагувати на натискання клавіш."""
+        if event.key == pygame.K_RIGHT:  # Якщо це клавіша "в право".
+            self.ship.moving_right = True  # Індикатор руху вправо => True
+        elif event.key == pygame.K_LEFT:  # Якщо це клавіша "вліво".
+            self.ship.moving_left = True  # Індикатор руху вліво => True
+
+    def _check_keyup_events(self, event):
+        """Реагувати, коли клавіша не натиснута."""
+        if event.key == pygame.K_RIGHT:  # Якщо це клавіша "в право".
+            self.ship.moving_right = False  # Індикатор руху вправо => False
+        elif event.key == pygame.K_LEFT:  # Якщо це клавіша "вліво".
+            self.ship.moving_left = False  # Індикатор руху вліво => False
 
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
