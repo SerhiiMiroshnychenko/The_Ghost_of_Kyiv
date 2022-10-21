@@ -7,6 +7,7 @@ class Ship:
     def __init__(self, ai_game):
         """Ініціалізувати корабель та задати його початкову позицію."""
         self.screen = ai_game.screen  # Зберігаємо екран як атрибут Ship.
+        self.settings = ai_game.settings  # Налаштування корабля.
         self.screen_rect = ai_game.screen.get_rect()  # Отримуємо атрибут екрана
         # rect за допомогою методу get_rect та зберігаємо його в self.screen_rect.
 
@@ -18,6 +19,9 @@ class Ship:
         # Створювати кожен новий корабель внизу екрана, по центру.
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # Зберегти десяткове значення для позиції корабля по горизонталі.
+        self.x = float(self.rect.x)
+
         # Індикатори руху.
         self.moving_right = False  # вправо
         self.moving_left = False   # вліво
@@ -25,9 +29,14 @@ class Ship:
     def update(self):
         """Оновити поточну позицію корабля на основі індикаторів руху."""
         if self.moving_right:  # Індикатор руху вправо.
-            self.rect.x += 1   # Зміщення об'єкта rect вправо. (Перемістити корабель праворуч.)
+            self.x += self.settings.ship_speed   # Зміщення позиції корабля по горизонталі вправо
+            # на ship_speed пікселей. (Перемістити корабель праворуч.)
         if self.moving_left:   # Індикатор руху вліво.
-            self.rect.x -= 1   # Зміщення об'єкта rect вліво. (Перемістити корабель ліворуч.)
+            self.x -= self.settings.ship_speed   # Зміщення позиції корабля по горизонталі вліво
+            # на ship_speed пікселей. (Перемістити корабель ліворуч.)
+
+        # Оновити об'єкт rect з self.x.
+        self.rect.x = self.x
 
 
     def blitme(self):

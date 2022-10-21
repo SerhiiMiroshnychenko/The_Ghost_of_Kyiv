@@ -7,3 +7,5 @@ class Settings:
         self.screen_width = 1200  # Ширина вікна
         self.screen_height = 750  # Висота вікна
         self.bg_color = (100, 100, 120)  # Колір фона (red-green-blue)
+        # Налаштування корабля
+        self.ship_speed = 1.5
