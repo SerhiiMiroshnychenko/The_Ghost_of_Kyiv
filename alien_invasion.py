@@ -36,6 +36,10 @@ class AlienInvasion:
             # сталися після її останнього виклику.
             if event.type == pygame.QUIT:  # Якщо гравець зачиняє вікно:
                 sys.exit()  # Вихід з гри.
+            elif event.type == pygame.KEYDOWN:   # Якщо клавіша натиснута.
+                if event.key == pygame.K_RIGHT:  # Якщо це клавіша "в право".
+                    # Перемістити корабель праворуч.
+                    self.ship.rect.x += 1
 
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
