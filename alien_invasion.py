@@ -43,7 +43,7 @@ class AlienInvasion:
                     # self.ship.rect.x += 1  # Перемістити корабель праворуч.
             elif event.type == pygame.KEYUP:  # Коли клавіша відпускається.
                 if event.key == pygame.K_RIGHT:  # Якщо це клавіша "в право".
-                    self.ship.moving_right = True  # Індикатор руху вправо => False
+                    self.ship.moving_right = False  # Індикатор руху вправо => False
 
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
