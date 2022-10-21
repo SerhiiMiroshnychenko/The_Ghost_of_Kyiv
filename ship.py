@@ -22,6 +22,9 @@ class Ship:
         self.moving_right = False
 
     def update(self):
+        """Оновити поточну позицію корабля на основі індикатора руху."""
+        if self.moving_right:
+            self.rect += 1
 
     def blitme(self):
         """Намалювати корабель у його поточному розташуванні."""
