@@ -21,13 +21,14 @@ class AlienInvasion:
         # Це "поверхня" (surface) - частина екрана, де показується елемент гри.
         pygame.display.set_caption("Alien Invasion")
 
-        self.ship = Ship(self)  # Створюємо корабель
+        self.ship = Ship(self)  # Створюємо корабель.
 
     def run_game(self):
         """Розпочати головний цикл гри."""
         while True:
-            self._check_events()   # Перевіряємо нові події
-            self._update_screen()  # Оновлюємо екран
+            self._check_events()   # Перевіряємо нові події.
+            self.ship.update()     # Оновлюємо поточну позицію корабля на основі індикатора руху.
+            self._update_screen()  # Оновлюємо екран.
 
     def _check_events(self):
         # Слідкувати за подіями миші та клавіатури.
