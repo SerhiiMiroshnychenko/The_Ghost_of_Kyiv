@@ -26,19 +26,24 @@ class AlienInvasion:
     def run_game(self):
         """Розпочати головний цикл гри."""
         while True:
-            # Слідкувати за подіями миші та клавіатури.
-            for event in pygame.event.get():  # Змінна event - це якась дія гравця. Цей цикл for - це диспетчер подій,
-                # що сприймає події та виконує відповідні дії. Функція pygame.event.get() повертає список подій, що
-                # сталися після її останнього виклику.
-                if event.type == pygame.QUIT:  # Якщо гравець зачиняє вікно:
-                    sys.exit()                 # Вихід з гри.
+            self._check_events()
+            self._update_screen()
 
-            # Наново перемалювати екран на кожній ітерації циклу.
-            self.screen.fill(self.settings.bg_color)  # Малюємо фон
-            self.ship.blitme()  # Малюємо корабель
+    def _check_events(self):
+        # Слідкувати за подіями миші та клавіатури.
+        for event in pygame.event.get():  # Змінна event - це якась дія гравця. Цей цикл for - це диспетчер подій,
+            # що сприймає події та виконує відповідні дії. Функція pygame.event.get() повертає список подій, що
+            # сталися після її останнього виклику.
+            if event.type == pygame.QUIT:  # Якщо гравець зачиняє вікно:
+                sys.exit()  # Вихід з гри.
 
-            # Показати останній намальований екран.
-            pygame.display.flip()
+    def _update_screen(self):
+        # Наново перемалювати екран на кожній ітерації циклу.
+        self.screen.fill(self.settings.bg_color)  # Малюємо фон
+        self.ship.blitme()  # Малюємо корабель
+
+        # Показати останній намальований екран.
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
