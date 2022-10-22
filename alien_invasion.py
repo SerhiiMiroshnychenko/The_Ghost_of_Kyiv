@@ -34,6 +34,12 @@ class AlienInvasion:
             self._check_events()   # Перевіряємо нові події.
             self.ship.update()     # Оновлюємо поточну позицію корабля на основі індикатора руху.
             self.bullets.update()  # Викликає bullet.update() для кожної кулі з групи bullets.
+
+            # Позбавитися куль, що зникли.
+            for bullet in self.bullets.copy():    # Для куль в копії групи bullets:
+                if bullet.rect.bottom <= 0:       # Якщо rect низу(bottom) кулі менше як 0 (поза верхом екрана)
+                    self.bullets.remove(bullet)   # Видалити ця кулю з групи.
+
             self._update_screen()  # Оновлюємо екран.
 
     def _check_events(self):
