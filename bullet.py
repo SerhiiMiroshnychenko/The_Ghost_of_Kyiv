@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
+from random import choice
 
 
 class Bullet(Sprite):
@@ -10,13 +11,14 @@ class Bullet(Sprite):
         super().__init__()  # Викликаємо успадкування від класу Sprite
         self.screen = ai_game.screen       # Додаємо атрибути для об'єкта screen
         self.settings = ai_game.settings   # Додаємо атрибути для об'єкта settings
-        self.color = self.settings.bullet_color  # Додаємо колір кулі
 
-        # Створити rect кулі у (0, 0) та задати правильну позицію.
-        self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)
-        # ^Створюємо атрибут rect для кулі. Ми не завантажуємо зображення,
-        # тож будуємо rect з нуля за допомогою класу pygame.Rect.
-        # Встановлюємо координати кулі на 0,0 та беремо ширину та висоту кулі з settings.
+        # Завантажити зображення кулі та отримати її rect.
+        self.image_0 = pygame.image.load('images/bullet_0.bmp')
+        self.image_1 = pygame.image.load('images/bullet_1.bmp')
+        self.image_2 = pygame.image.load('images/bullet_2.bmp')
+        self.rect = self.image_0.get_rect()  # Отримуємо доступ до атрибута rect
+        # поверхні self.image, який знадобиться нам для позиціювання кулі.
+
         self.rect.midtop = ai_game.ship.rect.midtop  # Прирівнюємо координати верху середини кулі
         # до верхівки середини корабля.
 
@@ -32,4 +34,4 @@ class Bullet(Sprite):
 
     def draw_bullet(self):
         """Намалювати кулю на екрані."""
-        pygame.draw.rect(self.screen, self.color, self.rect)
+        self.screen.blit(choice([self.image_0, self.image_1, self.image_2]), self.rect)
