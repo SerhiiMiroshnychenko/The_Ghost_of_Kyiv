@@ -48,6 +48,8 @@ class AlienInvasion:
             self.ship.moving_right = True  # Індикатор руху вправо => True
         elif event.key == pygame.K_LEFT:  # Якщо це клавіша "вліво".
             self.ship.moving_left = True  # Індикатор руху вліво => True
+        elif event.key == pygame.K_q:
+            sys.exit()
 
     def _check_keyup_events(self, event):
         """Реагувати, коли клавіша не натиснута."""
