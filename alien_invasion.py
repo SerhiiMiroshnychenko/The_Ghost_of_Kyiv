@@ -4,6 +4,7 @@ import pygame
 
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 class AlienInvasion:
@@ -25,12 +26,14 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)  # Створюємо корабель.
+        self.bullets = pygame.sprite.Group()  # Група, що зберігає всі "живі" кулі.
 
     def run_game(self):
         """Розпочати головний цикл гри."""
         while True:
             self._check_events()   # Перевіряємо нові події.
             self.ship.update()     # Оновлюємо поточну позицію корабля на основі індикатора руху.
+            self.bullets.update()  # Викликає bullet.update() для кожної кулі з групи bullets.
             self._update_screen()  # Оновлюємо екран.
 
     def _check_events(self):
@@ -53,6 +56,8 @@ class AlienInvasion:
             self.ship.moving_left = True  # Індикатор руху вліво => True
         elif event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
 
     def _check_keyup_events(self, event):
         """Реагувати, коли клавіша не натиснута."""
@@ -61,10 +66,17 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:  # Якщо це клавіша "вліво".
             self.ship.moving_left = False  # Індикатор руху вліво => False
 
+    def _fire_bullet(self):
+        """Створити нову кулю та додати її до групи куль."""
+        new_bullet = Bullet(self)     # Створюємо нову кулю.
+        self.bullets.add(new_bullet)  # Додаємо її до групи bullets з допомогою методу add.
+
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
         self.screen.fill(self.settings.bg_color)  # Малюємо фон
         self.ship.blitme()  # Малюємо корабель
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
 
         # Показати останній намальований екран.
         pygame.display.flip()
