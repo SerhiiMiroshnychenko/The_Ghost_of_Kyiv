@@ -108,9 +108,20 @@ class AlienInvasion:
 
     def _create_fleet(self):
         """Створити флот чужинців."""
-        # Створити прибульця.
-        alien = Alien(self)
-        self.aliens.add(alien)
+        # Створити прибульців та визначити кількість прибульців в ряду.
+        # Відстань між прибульцями дорівнює ширині одного прибульця.
+        alien = Alien(self)  # Перший чужий, що не стане частиною флоту. Потрібен для розрахунків.
+        alien_width = alien.rect.width  # Отримуємо ширину прибульця з його атрибута rect.
+        available_space_x = self.settings.screen_width - (2 * alien_width)  # Рахуємо скільки місця
+        # є під прибульців по горизонталі.
+        number_aliens_x = available_space_x // (2 * alien_width)  # Рахуємо скільки прибульців туди поміститься.
+
+        # Створити перший ряд прибульців.
+        for alien_number in range(number_aliens_x):
+            alien = Alien(self)  # Створити прибульця та поставити його до ряду.
+            alien.x = alien_width + 2 * alien_width * alien_number  # Координата кожного наступного прибульця по осі х
+            alien.rect.x = alien.x  # Задаємо розташування rect прибульця.
+            self.aliens.add(alien)  # Додаємо новоствореного чужого до групи aliens.
 
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
