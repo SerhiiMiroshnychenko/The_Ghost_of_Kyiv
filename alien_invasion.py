@@ -6,6 +6,7 @@ from settings import Settings
 from ship import Ship
 from bullet import Bullet
 from rocket import Rocket
+from alien import Alien
 
 
 class AlienInvasion:
@@ -28,6 +29,9 @@ class AlienInvasion:
         self.ship = Ship(self)  # Створюємо корабель.
         self.bullets = pygame.sprite.Group()  # Група, що зберігає всі "живі" кулі.
         self.rockets = pygame.sprite.Group()  # Група, що зберігає всі "живі" ракети.
+        self.aliens = pygame.sprite.Group()   # Група, що зберігає всіх "живих" ворогів.
+
+        self._create_fleet()
 
     def run_game(self):
         """Розпочати головний цикл гри."""
@@ -102,6 +106,12 @@ class AlienInvasion:
             if rocket.rect.bottom <= 0:  # Якщо rect низу(bottom) ракети менше як 0 (поза верхом екрана)
                 self.rockets.remove(rocket)  # Видалити ця ракету з групи.
 
+    def _create_fleet(self):
+        """Створити флот чужинців."""
+        # Створити прибульця.
+        alien = Alien(self)
+        self.aliens.add(alien)
+
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
         self.screen.fill(self.settings.bg_color)  # Малюємо фон
@@ -110,6 +120,7 @@ class AlienInvasion:
             bullet.draw_bullet()
         for rocket in self.rockets.sprites():
             rocket.draw_rocket()
+        self.aliens.draw(self.screen)
 
         # Показати останній намальований екран.
         pygame.display.flip()

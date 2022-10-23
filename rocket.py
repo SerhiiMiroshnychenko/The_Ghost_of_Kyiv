@@ -34,5 +34,5 @@ class Rocket(Bullet):
         self.rect.y = self.y
 
     def draw_rocket(self):
-        """Намалювати кулю на екрані."""
+        """Намалювати ракету на екрані."""
         self.screen.blit(choice([self.image_0, self.image_1, self.image_2, self.image_3, self.image_4]), self.rect)
