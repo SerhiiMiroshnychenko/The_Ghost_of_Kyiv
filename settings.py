@@ -17,3 +17,4 @@ class Settings:
         self.bullet_allowed = 3
         # Налаштування для ракети
         self.rocket_speed = 0.1
+        self.rocket_allowed = 5

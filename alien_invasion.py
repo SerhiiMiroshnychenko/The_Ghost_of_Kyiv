@@ -78,8 +78,9 @@ class AlienInvasion:
 
     def _fire_rocket(self):
         """Створити нову ракету та додати її до групи ракет."""
-        new_rocket = Rocket(self)     # Створюємо нову ракету.
-        self.rockets.add(new_rocket)  # Додаємо її до групи rockets з допомогою методу add.
+        if len(self.rockets) < self.settings.rocket_allowed:  # Якщо кількість ракет на екрані менша за дозволену
+            new_rocket = Rocket(self)     # Створюємо нову ракету.
+            self.rockets.add(new_rocket)  # Додаємо її до групи rockets з допомогою методу add.
 
     def _update_bullets(self):
         """Оновити позицію куль та позбавитися старих куль."""
