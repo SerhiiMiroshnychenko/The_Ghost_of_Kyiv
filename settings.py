@@ -8,6 +8,8 @@ class Settings:
         self.screen_height = 750  # Висота вікна
         self.bg_color = (100, 100, 120)  # Колір фона (red-green-blue)
         # Налаштування корабля
-        self.ship_speed = 1.5
+        self.ship_speed = 1.1
         # Налаштування для кулі
-        self.bullet_speed = 0.5
+        self.bullet_speed = 0.8
+        # Налаштування для ракети
+        self.rocket_speed = 0.5
