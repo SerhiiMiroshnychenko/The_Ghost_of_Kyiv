@@ -32,21 +32,10 @@ class AlienInvasion:
     def run_game(self):
         """Розпочати головний цикл гри."""
         while True:
-            self._check_events()   # Перевіряємо нові події.
-            self.ship.update()     # Оновлюємо поточну позицію корабля на основі індикатора руху.
-            self.bullets.update()  # Викликає bullet.update() для кожної кулі з групи bullets.
-            self.rockets.update()  # Викликає rocket.update() для кожної ракети з групи rockets.
-
-            # Позбавитися куль, що зникли.
-            for bullet in self.bullets.copy():    # Для куль в копії групи bullets:
-                if bullet.rect.bottom <= 0:       # Якщо rect низу(bottom) кулі менше як 0 (поза верхом екрана)
-                    self.bullets.remove(bullet)   # Видалити ця кулю з групи.
-
-            # Позбавитися ракет, що зникли.
-            for rocket in self.rockets.copy():  # Для ракет в копії групи rockets:
-                if rocket.rect.bottom <= 0:  # Якщо rect низу(bottom) ракети менше як 0 (поза верхом екрана)
-                    self.rockets.remove(rocket)  # Видалити ця ракету з групи.
-
+            self._check_events()    # Перевіряємо нові події.
+            self.ship.update()      # Оновлюємо поточну позицію корабля на основі індикатора руху.
+            self._update_bullets()  # Оновити позицію куль та позбавитися старих куль.
+            self._update_rockets()  # Оновити позицію ракет та позбавитися старих ракет.
             self._update_screen()  # Оновлюємо екран.
 
     def _check_events(self):
@@ -83,13 +72,34 @@ class AlienInvasion:
 
     def _fire_bullet(self):
         """Створити нову кулю та додати її до групи куль."""
-        new_bullet = Bullet(self)     # Створюємо нову кулю.
-        self.bullets.add(new_bullet)  # Додаємо її до групи bullets з допомогою методу add.
+        if len(self.bullets) < self.settings.bullet_allowed:  # Якщо кількість куль на екрані менша за дозволену
+            new_bullet = Bullet(self)     # Створюємо нову кулю.
+            self.bullets.add(new_bullet)  # Додаємо її до групи bullets з допомогою методу add.
 
     def _fire_rocket(self):
         """Створити нову ракету та додати її до групи ракет."""
         new_rocket = Rocket(self)     # Створюємо нову ракету.
         self.rockets.add(new_rocket)  # Додаємо її до групи rockets з допомогою методу add.
+
+    def _update_bullets(self):
+        """Оновити позицію куль та позбавитися старих куль."""
+        # Оновити позиції куль.
+        self.bullets.update()  # Викликає bullet.update() для кожної кулі з групи bullets.
+
+        # Позбавитися куль, що зникли.
+        for bullet in self.bullets.copy():  # Для куль в копії групи bullets:
+            if bullet.rect.bottom <= 0:  # Якщо rect низу(bottom) кулі менше як 0 (поза верхом екрана)
+                self.bullets.remove(bullet)  # Видалити ця кулю з групи.
+
+    def _update_rockets(self):
+        """Оновити позицію ракет та позбавитися старих ракет."""
+        # Оновити позицію ракет.
+        self.rockets.update()  # Викликає rocket.update() для кожної ракети з групи rockets.
+
+        # Позбавитися ракет, що зникли.
+        for rocket in self.rockets.copy():  # Для ракет в копії групи rockets:
+            if rocket.rect.bottom <= 0:  # Якщо rect низу(bottom) ракети менше як 0 (поза верхом екрана)
+                self.rockets.remove(rocket)  # Видалити ця ракету з групи.
 
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
