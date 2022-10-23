@@ -4,7 +4,8 @@ import pygame
 
 from settings import Settings
 from ship import Ship
-from bullet import Bullet, Rocket
+from bullet import Bullet
+from rocket import Rocket
 
 
 class AlienInvasion:
