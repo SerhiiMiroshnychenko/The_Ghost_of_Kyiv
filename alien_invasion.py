@@ -118,10 +118,15 @@ class AlienInvasion:
 
         # Створити перший ряд прибульців.
         for alien_number in range(number_aliens_x):
-            alien = Alien(self)  # Створити прибульця та поставити його до ряду.
-            alien.x = alien_width + 2 * alien_width * alien_number  # Координата кожного наступного прибульця по осі х
-            alien.rect.x = alien.x  # Задаємо розташування rect прибульця.
-            self.aliens.add(alien)  # Додаємо новоствореного чужого до групи aliens.
+            self._create_alien(alien_number)
+
+    def _create_alien(self, alien_number):
+        """Створити прибульця та поставити його до ряду."""
+        alien = Alien(self)  # Створити прибульця та поставити його до ряду.
+        alien_width = alien.rect.width
+        alien.x = alien_width + 2 * alien_width * alien_number  # Координата кожного наступного прибульця по осі х
+        alien.rect.x = alien.x  # Задаємо розташування rect прибульця.
+        self.aliens.add(alien)  # Додаємо новоствореного чужого до групи aliens.
 
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
