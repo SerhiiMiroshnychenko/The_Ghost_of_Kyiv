@@ -10,7 +10,7 @@ class Settings:
         # Налаштування корабля
         self.ship_speed = 1.1
         # Налаштування для кулі
-        self.bullet_speed = 1.8
+        self.bullet_speed = 1.5
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (0, 180, 180)
