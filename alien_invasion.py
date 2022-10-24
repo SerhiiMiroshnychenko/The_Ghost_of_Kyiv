@@ -41,7 +41,8 @@ class AlienInvasion:
             self.ship.update()      # Оновлюємо поточну позицію корабля на основі індикатора руху.
             self._update_bullets()  # Оновити позицію куль та позбавитися старих куль.
             self._update_rockets()  # Оновити позицію ракет та позбавитися старих ракет.
-            self._update_screen()  # Оновлюємо екран.
+            self._update_aliens()   # Оновити позицію прибульців.
+            self._update_screen()   # Оновлюємо екран.
 
     def _check_events(self):
         # Слідкувати за подіями миші та клавіатури.
@@ -141,6 +142,10 @@ class AlienInvasion:
         star = Star(self)
         star.set_position()
         star.draw_star()
+
+    def _update_aliens(self):
+        """Оновити позиції всіх прибульців у флоті."""
+        self.aliens.update()
 
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.

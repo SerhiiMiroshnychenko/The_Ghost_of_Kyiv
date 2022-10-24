@@ -22,3 +22,6 @@ class Settings:
         self.star_width = 3
         self.star_height = 12
         self.star_color = (200, 200, 250)
+        # Налаштування прибульця
+        self.alien_speed = 1.0
+
