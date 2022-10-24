@@ -111,21 +111,29 @@ class AlienInvasion:
         # Створити прибульців та визначити кількість прибульців в ряду.
         # Відстань між прибульцями дорівнює ширині одного прибульця.
         alien = Alien(self)  # Перший чужий, що не стане частиною флоту. Потрібен для розрахунків.
-        alien_width = alien.rect.width  # Отримуємо ширину прибульця з його атрибута rect.
+        alien_width, alien_height = alien.rect.size  # Отримуємо ширину та висоту прибульця з його атрибута rect.
         available_space_x = self.settings.screen_width - (2 * alien_width)  # Рахуємо скільки місця
         # є під прибульців по горизонталі.
         number_aliens_x = available_space_x // (2 * alien_width)  # Рахуємо скільки прибульців туди поміститься.
 
-        # Створити перший ряд прибульців.
-        for alien_number in range(number_aliens_x):
-            self._create_alien(alien_number)
+        # Визначити, яка кількість прибульців поміщається на екрані.
+        ship_height = self.ship.rect.height  # Висота прибульця
+        available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
+        # ^ Розрахунок місця по вертикалі
+        number_rows = available_space_y // (2 * alien_height)  # Розрахунок кількості рядів
 
-    def _create_alien(self, alien_number):
+        # Створити повний флот прибульців.
+        for row_number in range(number_rows):                 # Цикл рядів
+            for alien_number in range(number_aliens_x):       # Цикл прибульців в ряду
+                self._create_alien(alien_number, row_number)  # Створення конкретного прибульця
+
+    def _create_alien(self, alien_number, row_number):
         """Створити прибульця та поставити його до ряду."""
         alien = Alien(self)  # Створити прибульця та поставити його до ряду.
-        alien_width = alien.rect.width
+        alien_width, alien_height = alien.rect.size  # Отримуємо ширину та висоту прибульця з його атрибута rect.
         alien.x = alien_width + 2 * alien_width * alien_number  # Координата кожного наступного прибульця по осі х
         alien.rect.x = alien.x  # Задаємо розташування rect прибульця.
+        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)  # Додаємо новоствореного чужого до групи aliens.
 
     def _update_screen(self):
