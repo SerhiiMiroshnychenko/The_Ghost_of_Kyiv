@@ -18,3 +18,7 @@ class Settings:
         # Налаштування для ракети
         self.rocket_speed = 0.1
         self.rocket_allowed = 5
+        # Налаштування для зірки
+        self.bullet_width = 1
+        self.bullet_height = 1
+        self.bullet_color = (250, 250, 250)
