@@ -14,8 +14,10 @@ class Star(Sprite):
 
         # Створити rect зірки у (0, 0) та задати правильну позицію.
         self.rect = pygame.Rect(0, 0, self.settings.star_width, self.settings.star_height)
+
+    def set_position(self):
         x_position = choice(range(self.settings.screen_width))
-        y_position = choice(range(self.settings.screen_higth))
+        y_position = choice(range(self.settings.screen_height))
         self.rect.x = x_position
         self.rect.y = y_position
 

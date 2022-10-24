@@ -19,6 +19,6 @@ class Settings:
         self.rocket_speed = 0.1
         self.rocket_allowed = 5
         # Налаштування для зірки
-        self.bullet_width = 1
-        self.bullet_height = 1
-        self.bullet_color = (250, 250, 250)
+        self.star_width = 3
+        self.star_height = 12
+        self.star_color = (200, 200, 250)

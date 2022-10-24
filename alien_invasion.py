@@ -7,6 +7,7 @@ from ship import Ship
 from bullet import Bullet
 from rocket import Rocket
 from alien import Alien
+from star import Star
 
 
 class AlienInvasion:
@@ -136,9 +137,16 @@ class AlienInvasion:
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)  # Додаємо новоствореного чужого до групи aliens.
 
+    def _create_star(self):
+        star = Star(self)
+        star.set_position()
+        star.draw_star()
+
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
         self.screen.fill(self.settings.bg_color)  # Малюємо фон
+        for i in range(10):
+            self._create_star()
         self.ship.blitme()  # Малюємо корабель
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
