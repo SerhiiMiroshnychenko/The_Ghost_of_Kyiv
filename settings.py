@@ -23,5 +23,8 @@ class Settings:
         self.star_height = 12
         self.star_color = (200, 200, 250)
         # Налаштування прибульця
-        self.alien_speed = 1.0
+        self.alien_speed = 1.0      # Швидкість руху прибульця вбік
+        self.fleet_drop_speed = 10  # Швидкість спуску флоту
+        # fleet_direction 1 означає напрямок руху праворуч; -1 -- ліворуч.
+        self.fleet_direction = 1
 

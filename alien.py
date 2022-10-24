@@ -21,8 +21,14 @@ class Alien(Sprite):
         # Store the alien's exact horizontal position.
         self.x = float(self.rect.x)
 
+    def check_edges(self):
+        """Повертає істину, якщо прибулець знаходиться на краю екрана."""
+        screen_rect = self.screen.get_rect()  # атрибут rect екрану
+        if self.rect.right >= screen_rect.right or self.rect.left <= 0:  # Перевіряємо чи не на краю екрану
+            return True  # Повертає True, якщо на краю
+
     def update(self):
-        """Змістити прибульця праворуч."""
-        self.x += self.settings.alien_speed
+        """Змістити прибульця праворуч чи ліворуч."""
+        self.x += (self.settings.alien_speed * self.settings.fleet_direction)
         self.rect.x = self.x
 

@@ -138,13 +138,28 @@ class AlienInvasion:
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)  # Додаємо новоствореного чужого до групи aliens.
 
+    def _check_fleet_edges(self):
+        """Реагує відповідно до того, чи досяг котрийсь із прибульців краю екрана."""
+        for alien in self.aliens.sprites():     # Проходимо циклом по всіх прибульцях
+            if alien.check_edges():             # По кожному перевіряємо чи не краю екрану
+                self._change_fleet_direction()  # Якщо на краю => змінюємо напрямок флоту
+                break                           # Виходимо з циклу
+
+    def _change_fleet_direction(self):
+        """Спуск всього флоту та зміна його напрямку."""
+        for alien in self.aliens.sprites():                 # Проходимо циклом по всіх прибульцях
+            alien.rect.y += self.settings.fleet_drop_speed  # Переміщаємо кожного з них вниз
+        self.settings.fleet_direction *= -1                 # Множимо напрямок флоту на -1
+
     def _create_star(self):
         star = Star(self)
         star.set_position()
         star.draw_star()
 
     def _update_aliens(self):
-        """Оновити позиції всіх прибульців у флоті."""
+        """Перевірити, чи флот знаходиться на краю.
+        Оновити позиції всіх прибульців у флоті."""
+        self._check_fleet_edges()
         self.aliens.update()
 
     def _update_screen(self):
