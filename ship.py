@@ -1,4 +1,5 @@
 import pygame
+from random import choice
 
 
 class Ship:
@@ -13,6 +14,10 @@ class Ship:
 
         # Завантажити зображення корабля та отримати його rect.
         self.image = pygame.image.load('images/ua_ship.bmp')  # Завантажуємо зображення корабля
+        self.image1 = pygame.image.load('images/ua_ship_1.bmp')
+        self.image2 = pygame.image.load('images/ua_ship_2.bmp')
+        self.image3 = pygame.image.load('images/ua_ship_3.bmp')
+        self.image4 = pygame.image.load('images/ua_ship_4.bmp')
         self.rect = self.image.get_rect()  # Отримуємо доступ до атрибута rect
         # поверхні self.image, який знадобиться нам для позиціювання корабля.
 
@@ -40,7 +45,6 @@ class Ship:
         # Оновити об'єкт rect з self.x.
         self.rect.x = self.x
 
-
     def blitme(self):
         """Намалювати корабель у його поточному розташуванні."""
-        self.screen.blit(self.image, self.rect)  #
+        self.screen.blit(choice([self.image, self.image1, self.image2, self.image3, self.image4]), self.rect)  #
