@@ -187,6 +187,9 @@ class AlienInvasion:
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
 
+        # Шукати, чи котрийсь із прибульців досяг нижнього краю екрана
+        self._check_aliens_bottom()
+
     def _ship_hit(self):
         """Реагувати на зіткнення прибульця з кораблем."""
         # Зменшити ship.left
@@ -202,6 +205,15 @@ class AlienInvasion:
 
         # Пауза
         sleep(0.5)
+
+    def _check_aliens_bottom(self):
+        """Перевірити, чи не досяг якийсь прибулець нижнього краю екрана."""
+        screen_rect = self.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                #  Зреагувати так, ніби корабель було підбито
+                self._ship_hit()
+                break
 
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
