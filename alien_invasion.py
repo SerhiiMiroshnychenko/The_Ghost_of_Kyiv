@@ -208,7 +208,7 @@ class AlienInvasion:
 
     def _check_aliens_bottom(self):
         """Перевірити, чи не досяг якийсь прибулець нижнього краю екрана."""
-        screen_rect = self.get_rect()
+        screen_rect = self.screen.get_rect()
         for alien in self.aliens.sprites():
             if alien.rect.bottom >= screen_rect.bottom:
                 #  Зреагувати так, ніби корабель було підбито
