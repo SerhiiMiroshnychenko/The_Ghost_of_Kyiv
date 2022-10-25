@@ -9,6 +9,7 @@ class Settings:
         self.bg_color = (50, 50, 70)  # Колір фона (red-green-blue)
         # Налаштування корабля
         self.ship_speed = 1.1
+        self.ship_limit = 3
         # Налаштування для кулі
         self.bullet_speed = 1.5
         self.bullet_width = 4

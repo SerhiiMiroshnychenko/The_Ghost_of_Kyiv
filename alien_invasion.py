@@ -1,8 +1,10 @@
 import sys
+from time import sleep
 
 import pygame
 
 from settings import Settings
+from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from rocket import Rocket
@@ -26,6 +28,9 @@ class AlienInvasion:
         # завширшки та заввишки в пікселях.
         # Це "поверхня" (surface) - частина екрана, де показується елемент гри.
         pygame.display.set_caption("Alien Invasion")
+
+        # Створити екземпляр для збереження ігрової статистики
+        self.stats = GameStats(self)
 
         self.ship = Ship(self)  # Створюємо корабель.
         self.bullets = pygame.sprite.Group()  # Група, що зберігає всі "живі" кулі.
@@ -180,7 +185,23 @@ class AlienInvasion:
 
         # Шукати зіткнення куль із прибульцями.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship hit!!!")
+            self._ship_hit()
+
+    def _ship_hit(self):
+        """Реагувати на зіткнення прибульця з кораблем."""
+        # Зменшити ship.left
+        self.stats.ship_left -= 1
+
+        # Позбавитися надлишку прибульців та куль
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # Створити новий флот та відцентрувати корабель
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Пауза
+        sleep(0.5)
 
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
