@@ -43,10 +43,13 @@ class AlienInvasion:
         """Розпочати головний цикл гри."""
         while True:
             self._check_events()    # Перевіряємо нові події.
-            self.ship.update()      # Оновлюємо поточну позицію корабля на основі індикатора руху.
-            self._update_bullets()  # Оновити позицію куль та позбавитися старих куль.
-            self._update_rockets()  # Оновити позицію ракет та позбавитися старих ракет.
-            self._update_aliens()   # Оновити позицію прибульців.
+
+            if self.stats.game_active:
+                self.ship.update()      # Оновлюємо поточну позицію корабля на основі індикатора руху.
+                self._update_bullets()  # Оновити позицію куль та позбавитися старих куль.
+                self._update_rockets()  # Оновити позицію ракет та позбавитися старих ракет.
+                self._update_aliens()   # Оновити позицію прибульців.
+
             self._update_screen()   # Оновлюємо екран.
 
     def _check_events(self):
@@ -192,19 +195,22 @@ class AlienInvasion:
 
     def _ship_hit(self):
         """Реагувати на зіткнення прибульця з кораблем."""
-        # Зменшити ship.left
-        self.stats.ship_left -= 1
+        if self.stats.ship_left > 0:
+            # Зменшити ship.left
+            self.stats.ship_left -= 1
 
-        # Позбавитися надлишку прибульців та куль
-        self.aliens.empty()
-        self.bullets.empty()
+            # Позбавитися надлишку прибульців та куль
+            self.aliens.empty()
+            self.bullets.empty()
 
-        # Створити новий флот та відцентрувати корабель
-        self._create_fleet()
-        self.ship.center_ship()
+            # Створити новий флот та відцентрувати корабель
+            self._create_fleet()
+            self.ship.center_ship()
 
-        # Пауза
-        sleep(0.5)
+            # Пауза
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
 
     def _check_aliens_bottom(self):
         """Перевірити, чи не досяг якийсь прибулець нижнього краю екрана."""
