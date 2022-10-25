@@ -178,6 +178,10 @@ class AlienInvasion:
         self._check_fleet_edges()
         self.aliens.update()
 
+        # Шукати зіткнення куль із прибульцями.
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("Ship hit!!!")
+
     def _update_screen(self):
         # Наново перемалювати екран на кожній ітерації циклу.
         self.screen.fill(self.settings.bg_color)  # Малюємо фон
