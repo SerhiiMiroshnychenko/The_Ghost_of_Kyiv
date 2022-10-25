@@ -17,6 +17,7 @@ class Rocket(Bullet):
         self.image_2 = pygame.image.load('images/rocket2.bmp')
         self.image_3 = pygame.image.load('images/rocket3.bmp')
         self.image_4 = pygame.image.load('images/rocket4.bmp')
+        self.image_5 = pygame.image.load('images/rocket5.bmp')
         self.rect = self.image_0.get_rect()  # Отримуємо доступ до атрибута rect
         # поверхні self.image, який знадобиться нам для позиціювання ракети.
 
@@ -35,4 +36,4 @@ class Rocket(Bullet):
 
     def draw_rocket(self):
         """Намалювати ракету на екрані."""
-        self.screen.blit(choice([self.image_0, self.image_1, self.image_2, self.image_3, self.image_4]), self.rect)
+        self.screen.blit(choice([self.image_0, self.image_1, self.image_2, self.image_3, self.image_4, self.image_5]), self.rect)
