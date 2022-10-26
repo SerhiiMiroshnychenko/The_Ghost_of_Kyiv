@@ -9,9 +9,9 @@ class Button:
         self.screen_rect = self.screen.get_rect()
 
         # Задати розміри та властивості кнопки
-        self.wight, self.height = 200, 50  # Розміри кнопки
-        self.button_color = (0, 255, 0)    # Колір кнопки
-        self.text_color = (255, 255, 255)  # Колір тексту
+        self.wight, self.height = 300, 50  # Розміри кнопки
+        self.button_color = (100, 100, 150)    # Колір кнопки
+        self.text_color = (200, 200, 250)  # Колір тексту
         self.font = pygame.font.SysFont(None, 48)  # Визначаємо атрибут font (текст):
         # None -> повернення до уставної гарнітури, 48 -> розмір тексту
 

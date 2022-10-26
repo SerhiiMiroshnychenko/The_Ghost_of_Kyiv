@@ -41,7 +41,7 @@ class AlienInvasion:
         self._create_fleet()
 
         # Створити кнопку Play
-        self.play_button = Button(self, "Play")  # Створює (але не малює) екземпляр кнопки
+        self.play_button = Button(self, "Боронити Київ")  # Створює (але не малює) екземпляр кнопки
 
     def run_game(self):
         """Розпочати головний цикл гри."""
