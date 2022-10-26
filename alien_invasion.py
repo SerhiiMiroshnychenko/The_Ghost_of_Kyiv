@@ -5,6 +5,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from button import Button
 from ship import Ship
 from bullet import Bullet
 from rocket import Rocket
@@ -38,6 +39,9 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()   # Група, що зберігає всіх "живих" ворогів.
 
         self._create_fleet()
+
+        # Створити кнопку Play
+        self.play_button = Button(self, "Play")  # Створює (але не малює) екземпляр кнопки
 
     def run_game(self):
         """Розпочати головний цикл гри."""
@@ -232,6 +236,10 @@ class AlienInvasion:
         for rocket in self.rockets.sprites():
             rocket.draw_rocket()
         self.aliens.draw(self.screen)
+
+        # Намалювати кнопку Play, якщо гра не активна
+        if not self.stats.game_active:
+            self.play_button.draw_button()
 
         # Показати останній намальований екран.
         pygame.display.flip()
