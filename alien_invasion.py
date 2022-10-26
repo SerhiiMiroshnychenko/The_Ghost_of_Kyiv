@@ -77,6 +77,7 @@ class AlienInvasion:
         if button_clicked and not self.stats.game_active:  # якщо точка на екрані, де клацнув користувач,
             # міститься в області, позначений як rect кнопки Play та гра зараз не активна
             # Анулювати ігрову статистику
+            self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.stats.game_active = True  # Починаємо гру
 
@@ -145,6 +146,7 @@ class AlienInvasion:
         if not self.aliens:       # Якщо не залишилося прибульців
             self.bullets.empty()  # Знищити наявні кулі
             self._create_fleet()  # Створити новий флот
+            self.settings.increase_speed()  #Збільшення налаштувань швидкості
 
     def _update_rockets(self):
         """Оновити позицію ракет та позбавитися старих ракет."""

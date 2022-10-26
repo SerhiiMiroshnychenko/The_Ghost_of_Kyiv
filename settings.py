@@ -2,7 +2,7 @@ class Settings:
     """Клас для збереження всіх налаштувань гри."""
 
     def __init__(self):
-        """Ініціалізувати налаштування гри."""
+        """Ініціалізувати постійні налаштування гри."""
         # Screen settings
         self.screen_width = 1200  # Ширина вікна
         self.screen_height = 750  # Висота вікна
@@ -24,8 +24,24 @@ class Settings:
         self.star_height = 12
         self.star_color = (200, 200, 250)
         # Налаштування прибульця
-        self.alien_speed = 1.0      # Швидкість руху прибульця вбік
         self.fleet_drop_speed = 10  # Швидкість спуску флоту
         # fleet_direction 1 означає напрямок руху праворуч; -1 -- ліворуч.
         self.fleet_direction = 1
+
+        # Як швидко гра має прискорюватися
+        self.speedup_scale = 1.1  # Коефіціент прискорення
+        self.initialize_dynamic_settings()
+
+    def initialize_dynamic_settings(self):
+        """Ініціалізувація зміних налаштувань"""
+        self.alien_speed = 1.0      # Швидкість руху прибульця вбік
+        self.fleet_direction = 1  # fleet_direction 1 представляє напрямок праворуч; -1 -- ліворуч
+
+    def increase_speed(self):
+        """Збільшення налаштувань швидкості"""
+        #self.ship_speed *= self.speedup_scale
+        #self.bullet_speed *= self.speedup_scale
+        self.alien_speed *= self.speedup_scale
+
+
 
