@@ -68,8 +68,15 @@ class AlienInvasion:
             elif event.type == pygame.KEYUP:  # Коли клавіша відпускається.
                 self._check_keyup_events(event)
             elif event.type == pygame.MOUSEBUTTONDOWN:  # Якщо гравець клацає мишкою в межах екрана
-                mouse_pos = pygame.mouse.get_pos()      # Отримуємо позицію кліка мишкою
+                mouse_pos = pygame.mouse.get_pos()  # Отримуємо позицію кліка мишкою
                 self._check_play_button(mouse_pos)
+
+    def _check_play_button(self):
+        """Розпочати нову гру, коли користувач натисне кнопку Play"""
+        if self.play_button.rect.collidepoint(mouse_pos):  # якщо точка на екрані, де клацнув користувач,
+            # міститься в області, позначений як rect кнопки Play
+            # Анулювати ігрову статистику
+            self.stats.game_active = True  # Починаємо гру
 
     def _check_keydown_events(self, event):
         """Реагувати на натискання клавіш."""
