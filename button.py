@@ -29,4 +29,9 @@ class Button:
         self.msg_image_rect = self.msg_image.get_rect()  # Створюємо rect на базі зображення
         self.msg_image_rect.center = self.rect.center    # Прирівняємо центри кнопки та тексту
 
+    def draw_button(self):
+        # Намалювати порожню кнопку, а тоді -- повідомлення
+        self.screen.fill(self.button_color, self.rect)  # Створюємо прямокутну частину кнопки
+        self.screen.blit(self.msg_image, self.msg_image_rect)  # Малюємо зображення тексту на екрані
+
 
