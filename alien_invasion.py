@@ -5,6 +5,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from scoreboard import Scoreboard
 from button import Button, Greeting
 from ship import Ship
 from bullet import Bullet
@@ -31,7 +32,9 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         # Створити екземпляр для збереження ігрової статистики
+        # та табло на екрані
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         self.ship = Ship(self)  # Створюємо корабель.
         self.bullets = pygame.sprite.Group()  # Група, що зберігає всі "живі" кулі.
@@ -42,7 +45,7 @@ class AlienInvasion:
 
         # Створити кнопку Play
         self.play_button = Button(self, "Боронити Київ")  # Створює (але не малює) екземпляр кнопки
-        self.play_greeting = Greeting(self, '"Привид Києва" від Сергія Мірошниченко')
+        self.play_greeting = Greeting(self, '"ПРИВИД КИЄВА" від Сергія Мірошниченко')
 
     def run_game(self):
         """Розпочати головний цикл гри."""
@@ -81,6 +84,7 @@ class AlienInvasion:
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.stats.game_active = True  # Починаємо гру
+            self.sb.prep_score()  # Починаємо рахунок з нуля
 
             # Позбавитися надлишку прибульців та куль
             self.aliens.empty()
@@ -144,10 +148,15 @@ class AlienInvasion:
         # Якщо влучила, позбавитися кулі та прибульця.
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
+        if collisions:  # Якщо в прибульця потрапляє куля
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)  # Додаємо вартість прибульця до рахунку
+            self.sb.prep_score()  # Створюємо нове зображення рахунку
+
         if not self.aliens:       # Якщо не залишилося прибульців
             self.bullets.empty()  # Знищити наявні кулі
             self._create_fleet()  # Створити новий флот
-            self.settings.increase_speed()  #Збільшення налаштувань швидкості
+            self.settings.increase_speed()  # Збільшення налаштувань швидкості
 
     def _update_rockets(self):
         """Оновити позицію ракет та позбавитися старих ракет."""
@@ -264,6 +273,9 @@ class AlienInvasion:
         for rocket in self.rockets.sprites():
             rocket.draw_rocket()
         self.aliens.draw(self.screen)
+
+        # Намалювати інформацію про рахунок
+        self.sb.show_score()
 
         # Намалювати кнопку Play, якщо гра не активна
         if not self.stats.game_active:

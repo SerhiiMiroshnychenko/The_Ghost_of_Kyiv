@@ -36,6 +36,7 @@ class Settings:
         """Ініціалізувація зміних налаштувань"""
         self.alien_speed = 1.0      # Швидкість руху прибульця вбік
         self.fleet_direction = 1  # fleet_direction 1 представляє напрямок праворуч; -1 -- ліворуч
+        self.alien_points = 50  # Кількість балів за кожного збитого прибульця
 
     def increase_speed(self):
         """Збільшення налаштувань швидкості"""

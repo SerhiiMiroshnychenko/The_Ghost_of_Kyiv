@@ -45,10 +45,10 @@ class Greeting(Button):
         self.screen_rect = self.screen.get_rect()
 
         # Задати розміри та властивості кнопки
-        self.wight, self.height = 750, 50  # Розміри кнопки
+        self.wight, self.height = 1500, 160  # Розміри кнопки
         self.button_color = (220, 160, 0)    # Колір кнопки
         self.text_color = (0, 100, 180)  # Колір тексту
-        self.font = pygame.font.SysFont(None, 48)  # Визначаємо атрибут font (текст):
+        self.font = pygame.font.SysFont(None, 92)  # Визначаємо атрибут font (текст):
         # None -> повернення до уставної гарнітури, 48 -> розмір тексту
 
         # Створити об'єкт rect кнопки та відцентрувати його
