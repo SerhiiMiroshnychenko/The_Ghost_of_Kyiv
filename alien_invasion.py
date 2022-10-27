@@ -152,6 +152,7 @@ class AlienInvasion:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)  # Додаємо вартість прибульця до рахунку
             self.sb.prep_score()  # Створюємо нове зображення рахунку
+            self.sb.check_high_score()  # Створюємо нове зображення рекорду
 
         if not self.aliens:       # Якщо не залишилося прибульців
             self.bullets.empty()  # Знищити наявні кулі
