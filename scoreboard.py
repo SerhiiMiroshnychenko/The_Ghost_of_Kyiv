@@ -16,9 +16,9 @@ class Scoreboard:
         self.stats = ai_game.stats
 
         # Налаштування шрифту для показу рахунку
-        self.text_color = (250, 0, 0)  # Визначаємо колір тексту рахунку
-        self.text_color_hs = (125, 125, 175)  # Визначаємо колір тексту рекорду
-        self.text_color_lv = (0, 175, 200)  # Визначаємо колір тексту рівня
+        self.text_color = (200, 200, 250)  # Визначаємо колір тексту рахунку
+        self.text_color_hs = (100, 100, 150)  # Визначаємо колір тексту рекорду
+        self.text_color_lv = (125, 125, 175)  # Визначаємо колір тексту рівня
         self.font = pygame.font.SysFont(None, 45)  # Робимо екземпляр об'єкта шрифту
 
         # Підготувати зображення з початковим рахунком
@@ -32,7 +32,7 @@ class Scoreboard:
         rounded_score = self.stats.score
         score_str = "{:,}".format(rounded_score)  # Перетворюємо числове значення рахунку у стрічку додаючи коми
         # Передаємо стрічку функції render, що створює зображення. Передаємо render кольори екрану та тексту
-        score_str = "Збито: " + score_str + " москалів"
+        score_str = "Збито: " + score_str + " ворогів"
         self.score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
 
         # Показати рахунок у верхньому правому куті екрана
@@ -53,7 +53,7 @@ class Scoreboard:
         high_score = self.stats.high_score
         high_score_str = "{:,}".format(high_score)  # Перетворюємо числове значення у стрічку додаючи коми
         # Генеруємо зображення:
-        high_score_str = "Рекорд: " + high_score_str + " москалів"
+        high_score_str = "Рекорд: " + high_score_str + " ворогів"
         self.high_score_image = self.font.render(high_score_str, True, self.text_color_hs, self.settings.bg_color)
 
         # Відцентрувати рекорд по горизонталі

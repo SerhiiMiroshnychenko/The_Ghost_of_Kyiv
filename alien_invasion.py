@@ -2,6 +2,7 @@ import sys
 from time import sleep
 
 import pygame
+import json
 
 from settings import Settings
 from game_stats import GameStats
@@ -46,7 +47,7 @@ class AlienInvasion:
 
         # Створити кнопку Play
         self.play_button = Button(self, "Боронити Київ")  # Створює (але не малює) екземпляр кнопки
-        self.play_greeting = Greeting(self, '"ПРИВИД КИЄВА" від Сергія Мірошниченко')
+        self.play_greeting = Greeting(self, '"ПРИВИД КИЄВА" від Сергія Мірошниченка')
 
     def run_game(self):
         """Розпочати головний цикл гри."""
@@ -107,6 +108,8 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:  # Якщо це клавіша "вліво".
             self.ship.moving_left = True  # Індикатор руху вліво => True
         elif event.key == pygame.K_q:
+            with open("high_score.json", "w") as f:
+                json.dump(self.stats.high_score, f)
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
