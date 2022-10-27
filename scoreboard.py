@@ -20,7 +20,8 @@ class Scoreboard:
 
     def prep_score(self):
         """Перетворити рахунок на зображення"""
-        score_str = str(self.stats.score)  # Перетворюємо числове значення рахунку у стрічку
+        rounded_score = round(self.stats.score, -1)  # Округляємо рахунок до найближчого десятка
+        score_str = "{:,}".format(rounded_score)  # Перетворюємо числове значення рахунку у стрічку
         # Передаємо стрічку функції render, що створює зображення. Передаємо render кольори екрану та тексту
         self.score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
 
