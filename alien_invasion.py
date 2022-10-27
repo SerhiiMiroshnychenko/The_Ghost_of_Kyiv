@@ -12,6 +12,7 @@ from bullet import Bullet
 from rocket import Rocket
 from alien import Alien
 from star import Star
+from life import Life
 
 
 class AlienInvasion:
@@ -244,6 +245,7 @@ class AlienInvasion:
         if self.stats.ship_left > 0:
             # Зменшити ship.left
             self.stats.ship_left -= 1
+            self.sb.prep_lifes()
 
             # Позбавитися надлишку прибульців та куль
             self.aliens.empty()

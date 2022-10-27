@@ -1,4 +1,7 @@
 import pygame.font
+from pygame.sprite import Group
+
+from life import Life
 
 
 class Scoreboard:
@@ -6,6 +9,7 @@ class Scoreboard:
 
     def __init__(self, ai_game):
         """Ініціалізація атрибутів, пов'язаних із рахунком"""
+        self.ai_game = ai_game
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
         self.settings = ai_game.settings
@@ -21,6 +25,7 @@ class Scoreboard:
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
+        self.prep_lifes()
 
     def prep_score(self):
         """Перетворити рахунок на зображення"""
@@ -41,6 +46,7 @@ class Scoreboard:
         self.screen.blit(self.score_image, self.score_rect)  # рахунок
         self.screen.blit(self.high_score_image, self.high_score_rect)  # рекорд
         self.screen.blit(self.level_image, self.level_rect)  # рівень
+        self.lifes.draw(self.screen)
 
     def prep_high_score(self):
         """Згенерувати рекорд у зображення"""
@@ -72,4 +78,11 @@ class Scoreboard:
         self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
 
+    def prep_lifes(self):
+        self.lifes = Group()
+        for life_number in range(self.stats.ship_left):
+            life = Life(self.ai_game)
+            life.rect.x = 10 + life_number * life.rect.width
+            life.rect.y = 10
+            self.lifes.add(life)
 
