@@ -85,6 +85,7 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game_active = True  # Починаємо гру
             self.sb.prep_score()  # Починаємо рахунок з нуля
+            self.sb.prep_level()  # Обнуляємо рівень
 
             # Позбавитися надлишку прибульців та куль
             self.aliens.empty()
@@ -158,6 +159,10 @@ class AlienInvasion:
             self.bullets.empty()  # Знищити наявні кулі
             self._create_fleet()  # Створити новий флот
             self.settings.increase_speed()  # Збільшення налаштувань швидкості
+
+            # Збільшити рівень
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _update_rockets(self):
         """Оновити позицію ракет та позбавитися старих ракет."""

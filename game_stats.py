@@ -9,6 +9,7 @@ class GameStats:
         self.game_active = False
         # Рекорд не анульовується
         self.high_score = 0
+        self.level = 1
 
     def reset_stats(self):
         """Ініціалізація статистики, що може змінюватися впродовж гри."""
