@@ -5,7 +5,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
-from button import Button
+from button import Button, Greeting
 from ship import Ship
 from bullet import Bullet
 from rocket import Rocket
@@ -42,6 +42,7 @@ class AlienInvasion:
 
         # Створити кнопку Play
         self.play_button = Button(self, "Боронити Київ")  # Створює (але не малює) екземпляр кнопки
+        self.play_greeting = Greeting(self, '"Привид Києва" від Сергія Мірошниченко')
 
     def run_game(self):
         """Розпочати головний цикл гри."""
@@ -267,6 +268,7 @@ class AlienInvasion:
         # Намалювати кнопку Play, якщо гра не активна
         if not self.stats.game_active:
             self.play_button.draw_button()
+            self.play_greeting.draw_button()
 
         # Показати останній намальований екран.
         pygame.display.flip()
